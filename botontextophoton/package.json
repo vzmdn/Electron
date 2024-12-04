@@ -1,0 +1,15 @@
+{
+  "name": "botontextophoton",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^33.1.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}

@@ -1,0 +1,86 @@
+[
+    {
+        "nombre": "Television 50 p",
+        "precioCoste": 200,
+        "precioVenta": 250,
+        "stockActual": 13,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Television 60 p",
+        "precioCoste": 300,
+        "precioVenta": 350,
+        "stockActual": 10,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Reproductor DVD 1",
+        "precioCoste": 250,
+        "precioVenta": 300,
+        "stockActual": 4,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Reproductor DVD 2",
+        "precioCoste": 270,
+        "precioVenta": 370,
+        "stockActual": 4,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Cámara de Seguridad",
+        "precioCoste": 100,
+        "precioVenta": 150,
+        "stockActual": 15,
+        "stockMin": 8
+    },
+    {
+        "nombre": "Microondas 700W",
+        "precioCoste": 80,
+        "precioVenta": 120,
+        "stockActual": 20,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Aspiradora 1200W",
+        "precioCoste": 130,
+        "precioVenta": 180,
+        "stockActual": 8,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Licuadora 1.5L",
+        "precioCoste": 40,
+        "precioVenta": 60,
+        "stockActual": 25,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Plancha de vapor",
+        "precioCoste": 25,
+        "precioVenta": 40,
+        "stockActual": 10,
+        "stockMin": 15
+    },
+    {
+        "nombre": "Horno eléctrico 45L",
+        "precioCoste": 150,
+        "precioVenta": 200,
+        "stockActual": 6,
+        "stockMin": 4
+    },
+    {
+        "nombre": "Consola de videojuegos",
+        "precioCoste": 350,
+        "precioVenta": 450,
+        "stockActual": 1,
+        "stockMin": 3
+    },
+    {
+        "nombre": "Altavoces Bluetooth",
+        "precioCoste": 50,
+        "precioVenta": 75,
+        "stockActual": 5,
+        "stockMin": 10
+    }
+]

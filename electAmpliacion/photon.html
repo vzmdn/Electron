@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/photon.min.css">
+    <style>
+        h2,
+        h3 {
+            font-weight: bold;
+        }
+
+        header {
+            text-align: center
+        }
+
+        label {
+            vertical-align: middle;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .error{
+            display: none;
+            border: 1px solid red;
+            border-radius: 10px;
+            padding: 1%;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="toolbar toolbar-header"><!--photon-->
+        <form>
+            <label for="opciones">Seleccione un producto de la lista:</label>
+            <br>
+            <select id="opciones" class="form-control"></select>
+        </form>
+    </header>
+    <br>
+    <div class="flex">
+        <label for="caracteristicas">Información del artículo</label>
+        <table id="caracteristicas" class="table-striped"> <!--photon-->
+
+        </table>
+        <div class="button-container">
+            <button id="eliminarProducto" class="btn btn-mini btn-default">
+                Eliminar producto seleccionado
+            </button>
+            <button id="introducirProducto" class="btn btn-mini btn-default">
+                Introducir producto
+            </button>
+        </div>
+        <br>
+        <div id="sinNombre" class="error">El producto debe tener al menos un nombre</div>
+        <div id="sinProductos" class="error">Si eliminas todos los productos la vas a liar...</div>
+        
+        <div id="totales"></div>
+        <button id="generarLista" class="btn btn-mini btn-default">
+            generar lista de productos aleatorios
+        </button>
+    </div>
+</body>
+
+<script>
+    require('./index.js')
+</script>
+
+</html>

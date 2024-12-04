@@ -1,0 +1,254 @@
+[
+    {
+        "nombre": "Television 50 p",
+        "precioCoste": 200,
+        "precioVenta": 250,
+        "stockActual": 13,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Television 60 p",
+        "precioCoste": 300,
+        "precioVenta": 350,
+        "stockActual": 10,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Reproductor DVD 1",
+        "precioCoste": 250,
+        "precioVenta": 300,
+        "stockActual": 4,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Reproductor DVD 2",
+        "precioCoste": 270,
+        "precioVenta": 370,
+        "stockActual": 4,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Cámara de Seguridad",
+        "precioCoste": 100,
+        "precioVenta": 150,
+        "stockActual": 15,
+        "stockMin": 8
+    },
+    {
+        "nombre": "Microondas 700W",
+        "precioCoste": 80,
+        "precioVenta": 120,
+        "stockActual": 20,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Aspiradora 1200W",
+        "precioCoste": 130,
+        "precioVenta": 180,
+        "stockActual": 8,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Licuadora 1.5L",
+        "precioCoste": 40,
+        "precioVenta": 60,
+        "stockActual": 25,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Plancha de vapor",
+        "precioCoste": 25,
+        "precioVenta": 40,
+        "stockActual": 50,
+        "stockMin": 15
+    },
+    {
+        "nombre": "Horno eléctrico 45L",
+        "precioCoste": 150,
+        "precioVenta": 200,
+        "stockActual": 6,
+        "stockMin": 4
+    },
+    {
+        "nombre": "Consola de videojuegos",
+        "precioCoste": 350,
+        "precioVenta": 450,
+        "stockActual": 7,
+        "stockMin": 3
+    },
+    {
+        "nombre": "Altavoces Bluetooth",
+        "precioCoste": 50,
+        "precioVenta": 75,
+        "stockActual": 30,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Cafetera Express",
+        "precioCoste": 90,
+        "precioVenta": 140,
+        "stockActual": 10,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Refrigerador 400L",
+        "precioCoste": 500,
+        "precioVenta": 650,
+        "stockActual": 3,
+        "stockMin": 8
+    },
+    {
+        "nombre": "Ventilador de torre",
+        "precioCoste": 60,
+        "precioVenta": 90,
+        "stockActual": 22,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Batidora 500W",
+        "precioCoste": 45,
+        "precioVenta": 70,
+        "stockActual": 18,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Aire Acondicionado 12000 BTU",
+        "precioCoste": 350,
+        "precioVenta": 450,
+        "stockActual": 4,
+        "stockMin": 6
+    },
+    {
+        "nombre": "Cámara de acción 4K",
+        "precioCoste": 120,
+        "precioVenta": 180,
+        "stockActual": 8,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Reloj inteligente",
+        "precioCoste": 80,
+        "precioVenta": 120,
+        "stockActual": 15,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Tablet 10 pulgadas",
+        "precioCoste": 150,
+        "precioVenta": 210,
+        "stockActual": 10,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Computadora portátil 15\"",
+        "precioCoste": 600,
+        "precioVenta": 800,
+        "stockActual": 6,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Teclado mecánico RGB",
+        "precioCoste": 70,
+        "precioVenta": 110,
+        "stockActual": 25,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Auriculares inalámbricos",
+        "precioCoste": 50,
+        "precioVenta": 80,
+        "stockActual": 12,
+        "stockMin": 15
+    },
+    {
+        "nombre": "Disco duro externo 1TB",
+        "precioCoste": 80,
+        "precioVenta": 120,
+        "stockActual": 5,
+        "stockMin": 8
+    },
+    {
+        "nombre": "Proyector 4K",
+        "precioCoste": 400,
+        "precioVenta": 550,
+        "stockActual": 3,
+        "stockMin": 5
+    },
+    {
+        "nombre": "Impresora láser",
+        "precioCoste": 150,
+        "precioVenta": 200,
+        "stockActual": 7,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Lámpara LED inteligente",
+        "precioCoste": 25,
+        "precioVenta": 40,
+        "stockActual": 30,
+        "stockMin": 20
+    },
+    {
+        "nombre": "Silla ergonómica",
+        "precioCoste": 120,
+        "precioVenta": 180,
+        "stockActual": 10,
+        "stockMin": 15
+    },
+    {
+        "nombre": "Estufa de gas",
+        "precioCoste": 200,
+        "precioVenta": 270,
+        "stockActual": 4,
+        "stockMin": 6
+    },
+    {
+        "nombre": "Lavadora 8kg",
+        "precioCoste": 400,
+        "precioVenta": 550,
+        "stockActual": 6,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Secadora 7kg",
+        "precioCoste": 300,
+        "precioVenta": 450,
+        "stockActual": 8,
+        "stockMin": 15
+    },
+    {
+        "nombre": "Bicicleta estática",
+        "precioCoste": 100,
+        "precioVenta": 160,
+        "stockActual": 18,
+        "stockMin": 10
+    },
+    {
+        "nombre": "Bomba de agua",
+        "precioCoste": 90,
+        "precioVenta": 130,
+        "stockActual": 3,
+        "stockMin": 7
+    },
+    {
+        "nombre": "Generador eléctrico 1500W",
+        "precioCoste": 250,
+        "precioVenta": 350,
+        "stockActual": 5,
+        "stockMin": 9
+    },
+    {
+        "nombre": "Sofá 3 plazas",
+        "precioCoste": 300,
+        "precioVenta": 450,
+        "stockActual": 10,
+        "stockMin": 12
+    },
+    {
+        "nombre": "Colchón 2 plazas",
+        "precioCoste": 250,
+        "precioVenta": 350,
+        "stockActual": 7,
+        "stockMin": 10
+    }
+]
