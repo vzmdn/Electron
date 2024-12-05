@@ -1,3 +1,4 @@
 {
-    "livePreview.defaultPreviewPath": "/electrodomesticos/photon.html"
+    "livePreview.defaultPreviewPath": "/electrodomesticos/photon.html",
+    "git.ignoreLimitWarning": true
 }
