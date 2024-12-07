@@ -17,22 +17,7 @@ slider.addEventListener("input", (event) => {
     startGame();
 });
 
-/**
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * arreglar dificultad
- * 
- * 
- * 
- * 
- * 
- * 
- */
+
 dropdown.addEventListener("change", (event) => {
     let n = parseInt(event.target.value);
     switch(n){
@@ -65,7 +50,7 @@ function createCells() {
     for (let i = 0; i < rowsNum; i++) {
         rows += `<tr id=tr${i}>`;
         for (let n = 0; n < rowsNum; n++) {
-            rows += `<td id=td${cells}>${cells}</td>`;
+            rows += `<td id=td${cells}></td>`;
             cells++;
         }
         rows += `</tr>`;
@@ -103,7 +88,6 @@ function startRabbit() {
     rabbitCellId = Math.floor(Math.random() * rowsNum * rowsNum);
     rabbitCell = document.getElementById(`td${rabbitCellId}`);
     rabbitCell.addEventListener("click", rabbitFound);
-    rabbitCell.innerHTML = "🐰";
     console.log(rabbitCell);
     return rabbitCell;
 }
@@ -139,7 +123,6 @@ function rabbitCellMoves() {
         rabbitCell = document.getElementById(`td${newRabbitCellId}`);
         rabbitCell.removeEventListener("click", normalCell);
         rabbitCell.addEventListener("click", rabbitFound);
-        rabbitCell.innerHTML = "🐰";
     }
 }
 
@@ -195,9 +178,9 @@ function newPosition() {
 
 //LISTENERS
 function rabbitFound() {
+    rabbitCell.innerHTML = "🐰";
     tries++;
     document.getElementById("tries").innerHTML = `Tries: ${tries}`;
-    rabbitCell.innerHTML = "🐰";
     for (let i = 0; i < rowsNum * rowsNum; i++) {
         let td = document.getElementById(`td${i}`);
         td.removeEventListener("click", normalCell);
