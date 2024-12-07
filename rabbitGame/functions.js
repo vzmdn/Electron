@@ -4,11 +4,44 @@ let rabbitCellId;
 let difficulty = 3; //lower -> harder
 let currentArrows = [];
 let slider = document.getElementById("slider");
-let rowsNum = slider.value;
+let dropdown = document.getElementById("difficultyDropdown");
+let rowsNum = parseInt(slider.value);
 let endGame = false;
+let topWall = [];
+let leftWall = [];
+let rightWall = [];
+let bottomWall = [];
 
 slider.addEventListener("input", (event) => {
     rowsNum = event.target.value;
+    startGame();
+});
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * arreglar dificultad
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+dropdown.addEventListener("change", (event) => {
+    let n = parseInt(event.target.value);
+    switch(n){
+        case 1: difficulty = 15; break;
+        case 2: difficulty = 10; break;
+        case 3: difficulty = 5; break;
+        case 4: difficulty = 3; break;
+        case 5: difficulty = 1; break;
+    }
     startGame();
 });
 
@@ -19,9 +52,12 @@ function startGame() {
     tries = 0;
     document.getElementById("tries").innerHTML = `Tries: ${tries}`;
     createCells();
+    paintCells();
     startCells();
+    initWalls();
 }
 
+//START GAME FUNCTIONS
 function createCells() {
     let table = document.getElementById("table");
     let rows = "";
@@ -29,77 +65,180 @@ function createCells() {
     for (let i = 0; i < rowsNum; i++) {
         rows += `<tr id=tr${i}>`;
         for (let n = 0; n < rowsNum; n++) {
-            rows += `<td id=td${cells}></td>`;
+            rows += `<td id=td${cells}>${cells}</td>`;
             cells++;
         }
         rows += `</tr>`;
     }
     table.innerHTML = rows;
 }
-
+function paintCells() {
+    for (let i = 0; i < rowsNum * rowsNum; i++) {
+        let td = document.getElementById(`td${i}`);
+        let row = Math.floor(i / rowsNum);
+        let col = i % rowsNum;
+        let color = (row + col) % 2 === 0 ? "rgb(170,215,81)" : "rgb(162,209,73)";
+        td.style.backgroundColor = color;
+    }
+}
 function startCells() {
     startRabbit();
-    paintCells();
     setNormalCells();
+}
+function initWalls() {
     for (let i = 0; i < rowsNum * rowsNum; i++) {
-        td.addEventListener("click", normalCell);
+        let row = Math.floor(i / rowsNum);
+        let col = i % rowsNum;
+        if (row === 0) topWall.push(i);
+        if (col === 0) leftWall.push(i);
+        if (col === rowsNum - 1) rightWall.push(i);
+        if (row === rowsNum - 1) bottomWall.push(i);
     }
-
-        let tdId = td.id.slice(2);
-        if (tdId == rabbitCellId) {
-            //td.innerHTML = "🐰";
-            td.addEventListener("click", rabbitFound);
-        } else {
-            
-        }
-    }
-
-
+    console.log("topwall: " + topWall);
+    console.log("leftwall: " + leftWall);
+    console.log("rightwall:" + rightWall);
+    console.log("bottomwall: " + bottomWall);
+}
 function startRabbit() {
     rabbitCellId = Math.floor(Math.random() * rowsNum * rowsNum);
     rabbitCell = document.getElementById(`td${rabbitCellId}`);
+    rabbitCell.addEventListener("click", rabbitFound);
+    rabbitCell.innerHTML = "🐰";
+    console.log(rabbitCell);
+    return rabbitCell;
+}
+function setNormalCells() {
+    for (let i = 0; i < rowsNum * rowsNum; i++) {
+        let td = document.getElementById(`td${i}`);
+        if (rabbitCellId != i)
+            td.addEventListener("click", normalCell);
+    }
 }
 
+//LOGIC FUNCTIONS
+function rabbitCellMoves() {
+    let canMove = false;
+    let newRabbitCellId;
+    do {
+        newRabbitCellId = newPosition();
+        console.log(`new position ${newRabbitCellId}`);
+
+        if (newRabbitCellId < 0 || newRabbitCellId >= (rowsNum * rowsNum) || newRabbitCellId == -1)
+            continue;
+        else canMove = true;
+    } while (!canMove);
+
+    if (canMove) {
+        console.log("///////////////////////")
+        console.log("rabbit moves")
+        console.log("///////////////////////")
+        rabbitCell.removeEventListener("click", rabbitFound);
+        rabbitCell.addEventListener("click", normalCell);
+        rabbitCell.innerHTML = "";
+        rabbitCellId = newRabbitCellId;
+        rabbitCell = document.getElementById(`td${newRabbitCellId}`);
+        rabbitCell.removeEventListener("click", normalCell);
+        rabbitCell.addEventListener("click", rabbitFound);
+        rabbitCell.innerHTML = "🐰";
+    }
+}
+
+function newPosition() {
+    let direction = Math.floor(Math.random() * 8);
+    console.log(`direction: ${direction}`);
+    console.log(`current position: ${rabbitCellId}`);
+    console.log(`rowsNum: ${rowsNum}`);
+    switch (direction) {
+        case 0:
+            //↖️
+            if (topWall.includes(rabbitCellId) || leftWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId - rowsNum - 1);
+        case 1:
+            //⬆️
+            if (topWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId - rowsNum);
+        case 2:
+            //↗️
+            if (topWall.includes(rabbitCellId) || rightWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId - rowsNum + 1);
+        case 3:
+            //⬅️
+            if (leftWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId - 1);
+        case 4:
+            //➡️
+            if (rightWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId + 1);
+        case 5:
+            //↙️
+            if (leftWall.includes(rabbitCellId) || bottomWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId + rowsNum - 1);
+        case 6:
+            //⬇️
+            if (bottomWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId + rowsNum);
+        case 7:
+            //↘️
+            if (rightWall.includes(rabbitCellId) || bottomWall.includes(rabbitCellId))
+                return -1;
+            else return (rabbitCellId + rowsNum + 1);
+    }
+    return -1;
+}
+
+//LISTENERS
+function rabbitFound() {
+    tries++;
+    document.getElementById("tries").innerHTML = `Tries: ${tries}`;
+    rabbitCell.innerHTML = "🐰";
+    for (let i = 0; i < rowsNum * rowsNum; i++) {
+        let td = document.getElementById(`td${i}`);
+        td.removeEventListener("click", normalCell);
+        td.removeEventListener("click", rabbitFound);
+    }
+    if (tries === 1) alert(`You found the rabbit at first try!`);
+    else alert(`You found the rabbit in ${tries} tries!`);
+    startGame();
+}
+//listener normalCell
 function normalCell(event) {
+    rabbitCellMoves();
     let td = event.currentTarget;
     let tdId = parseInt(td.id.slice(2));
-    let mcId = rabbitCellId;
 
     let tdTens = Math.floor(tdId / rowsNum);
     let tdUnits = tdId % rowsNum;
-    let mcTens = Math.floor(mcId / rowsNum);
-    let mcUnits = mcId % rowsNum;
+    let rcTens = Math.floor(rabbitCellId / rowsNum);
+    let rcUnits = rabbitCellId % rowsNum;
 
-    if (tdId == rabbitCellId) {
-        td.innerHTML = "🐰";
-        setTimeout(() => {
-            alert(`Rabbit found after ${tries} tries`);
-            startGame(); // Starts the game after the alert
-        }, 2000); // Wait for 2 seconds before showing alert
-    } else rabbitCellMoves(td);
 
-    if (tdTens === mcTens) {
-        if (tdId > mcId) td.innerHTML = "⬅️";
+    if (tdTens === rcTens) {
+        if (tdId > rabbitCellId) td.innerHTML = "⬅️";
         else td.innerHTML = "➡️";
     }
-    if (tdUnits === mcUnits) {
-        if (tdId > mcId) td.innerHTML = "⬆️";
+    if (tdUnits === rcUnits) {
+        if (tdId > rabbitCellId) td.innerHTML = "⬆️";
         else td.innerHTML = "⬇️";
     }
-    if (tdTens > mcTens) {
-        if (tdUnits > mcUnits) td.innerHTML = "↖️";
-        if (tdUnits < mcUnits) td.innerHTML = "↗️";
+    if (tdTens > rcTens) {
+        if (tdUnits > rcUnits) td.innerHTML = "↖️";
+        if (tdUnits < rcUnits) td.innerHTML = "↗️";
     }
-    if (tdTens < mcTens) {
-        if (tdUnits < mcUnits) td.innerHTML = "↘️";
-        if (tdUnits > mcUnits) td.innerHTML = "↙️";
+    if (tdTens < rcTens) {
+        if (tdUnits < rcUnits) td.innerHTML = "↘️";
+        if (tdUnits > rcUnits) td.innerHTML = "↙️";
     }
 
-    if (!currentArrows.includes(tdId)) {
-        currentArrows.push(tdId);
-        tries++;
-        document.getElementById("tries").innerHTML = `Tries: ${tries}`;
-    }
+    currentArrows.push(tdId);
+    tries++;
+    document.getElementById("tries").innerHTML = `Tries: ${tries}`;
 
     if (currentArrows.length > difficulty) {
         let lastCell = document.getElementById(`td${currentArrows[0]}`);
@@ -108,72 +247,6 @@ function normalCell(event) {
     }
 
 }
-
-function rabbitCellMoves() {
-    let currentRabbitCell = document.getElementById(`td${rabbitCellId}`);
-    currentRabbitCell.innerHTML = "";
-    currentRabbitCell.removeEventListener("click", rabbitFound);
-    currentRabbitCell.addEventListener("click", normalCell);
-    let newRabbitCellId;
-    let direction = Math.floor(Math.random() * 8);
-    switch (direction) {
-        case 0:
-            //↖️
-            newRabbitCellId = rabbitCellId - rowsNum - 1;
-            break;
-        case 1:
-            //⬆️
-            newRabbitCellId = rabbitCellId - rowsNum;
-            break;
-        case 2:
-            //↗️
-            newRabbitCellId = rabbitCellId - rowsNum + 1;
-            break;
-        case 3:
-            //⬅️
-            newRabbitCellId = rabbitCellId - 1;
-            break;
-        case 4:
-            //➡️
-            newRabbitCellId = rabbitCellId + 1;
-            break;
-        case 5:
-            //↙️
-            newRabbitCellId = rabbitCellId + rowsNum - 1;
-            break;
-        case 6:
-            //⬇️
-            newRabbitCellId = rabbitCellId + rowsNum;
-            break;
-        case 7:
-            //↘️
-            newRabbitCellId = rabbitCellId + rowsNum + 1;
-            break;
-    }
-    //console.log(`newRabbitCellId: ${newRabbitCellId}`);
-    if (newRabbitCellId >= 0 && newRabbitCellId < rowsNum * rowsNum) {
-        rabbitCellId = newRabbitCellId;
-        let newRabbitCell = document.getElementById(`td${rabbitCellId}`);
-        if (newRabbitCell) {
-            //newRabbitCell.innerHTML = "🐰";
-            newRabbitCell.addEventListener("click", rabbitFound);
-        }
-    }
-}
-
-function rabbitFound() {
-}
-
-function paintCells(){
-    for (let i = 0; i < rowsNum * rowsNum; i++) {
-        let td = document.getElementById(`td${i}`);
-        let row = Math.floor(i / rowsNum);
-        let col = i % rowsNum;
-        let color = (row + col) % 2 === 0 ? "rgb(170,215,81)" : "rgb(162,209,73)";
-        td.style.backgroundColor = color;
-}
-}
-
 
 
 
