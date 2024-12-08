@@ -1,7 +1,7 @@
 //const { app, BrowserWindow} = require('electron');
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 
-let mainWindow;
+//let mainWindow;
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -32,15 +32,16 @@ app.on('activate', () => {
 app.whenReady().then(createWindow);
 
 
-ipcMain.handle("show-message-box", async (_, message) => {
-    await dialog.showMessageBox({
+ipcMain.handle("show-message-box", async (_, { title, message, buttons }) => {
+    const response = await dialog.showMessageBox({
         type: "info",
-        buttons: ["play again"],
-        title: "Rabbit Found!",
+        buttons: buttons || ["OK"],  // Default button is "OK" if no buttons are passed
+        title: title || "Information", // Default title if no title is passed
         message: message,
     });
+    
+    return response; // Optionally, return a response if you need to handle button clicks or results in the renderer
 });
-
 // Handle requests from renderer to open dialog
 /*ipcMain.handle('show-open-dialog', async (event, options) => {
     const result = await dialog.showOpenDialog(mainWindow, options);

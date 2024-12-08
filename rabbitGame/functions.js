@@ -1,5 +1,3 @@
-//const { dialog } = require('electron').remote;
-
 let tries = 0;
 let rabbitCell;
 let rabbitCellId;
@@ -14,26 +12,17 @@ let leftWall = [];
 let rightWall = [];
 let bottomWall = [];
 
-slider.addEventListener("input", (event) => {
-    rowsNum = event.target.value;
-    startGame();
-});
-
-
-dropdown.addEventListener("change", (event) => {
-    let n = parseInt(event.target.value);
-    switch (n) {
-        case 1: difficulty = 15; break;
-        case 2: difficulty = 10; break;
-        case 3: difficulty = 5; break;
-        case 4: difficulty = 3; break;
-        case 5: difficulty = 1; break;
-    }
-    startGame();
-});
-
 startGame();
 
+slider.addEventListener("input", (event) => {
+    rowsNum = parseInt(event.target.value);
+    refreshGame();
+});
+
+dropdown.addEventListener("change", (event) => {
+    changeDifficulty(event);
+    refreshGame();
+});
 
 function startGame() {
     console.log("startGame called");
@@ -44,6 +33,35 @@ function startGame() {
     startCells();
     initWalls();
 }
+
+function refreshGame() {
+    tries = 0;
+    document.getElementById("tries").innerHTML = `Tries: ${tries}`;
+    clearEventListeners();
+    clearWalls();
+    currentArrows = [];
+    createCells();
+    paintCells();
+    startCells();
+    initWalls();
+}
+
+function clearEventListeners() {
+    for (let i = 0; i < rowsNum * rowsNum; i++) {
+        let td = document.getElementById(`td${i}`);
+        if (td) {
+            td.removeEventListener("click", normalCell);
+            td.removeEventListener("click", rabbitFound);
+        }
+    }
+       
+}
+ function clearWalls() {
+        topWall = [];
+        leftWall = [];
+        rightWall = [];
+        bottomWall = [];
+    }
 
 //START GAME FUNCTIONS
 function createCells() {
@@ -60,6 +78,7 @@ function createCells() {
     }
     table.innerHTML = rows;
 }
+
 function paintCells() {
     for (let i = 0; i < rowsNum * rowsNum; i++) {
         let td = document.getElementById(`td${i}`);
@@ -69,10 +88,12 @@ function paintCells() {
         td.style.backgroundColor = color;
     }
 }
+
 function startCells() {
     startRabbit();
     setNormalCells();
 }
+
 function initWalls() {
     for (let i = 0; i < rowsNum * rowsNum; i++) {
         let row = Math.floor(i / rowsNum);
@@ -87,6 +108,7 @@ function initWalls() {
     console.log("rightwall:" + rightWall);
     console.log("bottomwall: " + bottomWall);
 }
+
 function startRabbit() {
     rabbitCellId = Math.floor(Math.random() * rowsNum * rowsNum);
     rabbitCell = document.getElementById(`td${rabbitCellId}`);
@@ -94,6 +116,7 @@ function startRabbit() {
     console.log(rabbitCell);
     return rabbitCell;
 }
+
 function setNormalCells() {
     for (let i = 0; i < rowsNum * rowsNum; i++) {
         let td = document.getElementById(`td${i}`);
@@ -180,6 +203,7 @@ function newPosition() {
 }
 
 //LISTENERS
+//listener rabbitFound
 function rabbitFound() {
     rabbitCell.innerHTML = "🐰";
     tries++;
@@ -192,12 +216,21 @@ function rabbitFound() {
     let message = tries === 1
         ? `You found the rabbit on the first try!`
         : `You found the rabbit in ${tries} tries!`;
-        window.electronAPI.showMessageBox(message).then(() => {
-            console.log("Dialog dismissed. Restarting game...");
-            // Restart the game after the dialog is closed
+    window.electronAPI.showMessageBox({
+        title: "Rabbit Found!",
+        message: message,
+        buttons: ["Play Again", "Exit"]
+    }).then(response => {
+        if (response.response === 0) {
+            // User clicked "Play Again"
             startGame();
-        });
+        } else {
+            // User clicked "Exit"
+            window.close(); // Or any other logic to close or exit the game
+        }
+    });
 }
+
 //listener normalCell
 function normalCell(event) {
     rabbitCellMoves();
@@ -208,7 +241,6 @@ function normalCell(event) {
     let tdUnits = tdId % rowsNum;
     let rcTens = Math.floor(rabbitCellId / rowsNum);
     let rcUnits = rabbitCellId % rowsNum;
-
 
     if (tdTens === rcTens) {
         if (tdId > rabbitCellId) td.innerHTML = "⬅️";
@@ -236,12 +268,17 @@ function normalCell(event) {
         lastCell.innerHTML = "";
         currentArrows.shift();
     }
-
 }
 
-
-
-
-
-
-
+//listener changeDifficulty
+function changeDifficulty(event) {
+    let n = parseInt(event.target.value);
+    switch (n) {
+        case 1: difficulty = 15; break;
+        case 2: difficulty = 10; break;
+        case 3: difficulty = 5; break;
+        case 4: difficulty = 3; break;
+        case 5: difficulty = 1; break;
+    }
+    refreshGame();
+}
