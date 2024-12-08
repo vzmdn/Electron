@@ -1,3 +1,5 @@
+//const { dialog } = require('electron').remote;
+
 let tries = 0;
 let rabbitCell;
 let rabbitCellId;
@@ -20,7 +22,7 @@ slider.addEventListener("input", (event) => {
 
 dropdown.addEventListener("change", (event) => {
     let n = parseInt(event.target.value);
-    switch(n){
+    switch (n) {
         case 1: difficulty = 15; break;
         case 2: difficulty = 10; break;
         case 3: difficulty = 5; break;
@@ -34,6 +36,7 @@ startGame();
 
 
 function startGame() {
+    console.log("startGame called");
     tries = 0;
     document.getElementById("tries").innerHTML = `Tries: ${tries}`;
     createCells();
@@ -186,9 +189,14 @@ function rabbitFound() {
         td.removeEventListener("click", normalCell);
         td.removeEventListener("click", rabbitFound);
     }
-    if (tries === 1) alert(`You found the rabbit at first try!`);
-    else alert(`You found the rabbit in ${tries} tries!`);
-    startGame();
+    let message = tries === 1
+        ? `You found the rabbit on the first try!`
+        : `You found the rabbit in ${tries} tries!`;
+        window.electronAPI.showMessageBox(message).then(() => {
+            console.log("Dialog dismissed. Restarting game...");
+            // Restart the game after the dialog is closed
+            startGame();
+        });
 }
 //listener normalCell
 function normalCell(event) {
