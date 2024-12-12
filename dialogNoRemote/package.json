@@ -7,8 +7,9 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "electron": "^33.2.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

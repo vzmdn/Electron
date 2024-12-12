@@ -40,3 +40,17 @@ ipcMain.handle('show-dialog', async (event, args) => {
   });
   return result;
 });
+
+ipcMain.handle('open-file', async (event, args) => {
+  const result = await dialog.showOpenDialog({
+    properties: ['openFile']
+  });
+  return result;
+});
+
+ipcMain.handle('save-file', async (event, args) => {
+  const result = await dialog.showSaveDialog({
+    properties: ['saveFile']
+  });
+  return result;
+});
