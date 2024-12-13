@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -45,12 +46,12 @@ ipcMain.handle('open-file', async (event, args) => {
   const result = await dialog.showOpenDialog({
     properties: ['openFile']
   });
-  return result;
+  const filepath = result.filePaths[0]
+  const data = require(filepath)
+  return data;
 });
 
 ipcMain.handle('save-file', async (event, args) => {
-  const result = await dialog.showSaveDialog({
-    properties: ['saveFile']
-  });
+  const result = await dialog.showSaveDialog();
   return result;
 });
