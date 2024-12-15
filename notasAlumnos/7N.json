@@ -1,27 +1,27 @@
 [
-    {
-        "grupo": "7N",
-        "nombre": "nombre 1",
-        "nota": "5"
-    },
-    {
-        "grupo": "7N",
-        "nombre": "nombre 2",
-        "nota": "3"
-    },
-    {
-        "grupo": "7N",
-        "nombre": "nombre 3",
-        "nota": "3"
-    },
-    {
-        "grupo": "7N",
-        "nombre": "nombre 4",
-        "nota": "3"
-    },
-    {
-        "grupo": "7N",
-        "nombre": "nombre 5",
-        "nota": "5"
-    }
+  {
+    "grupo": "7Ndasgas",
+    "nombre": "d1",
+    "nota": "5dgasdg"
+  },
+  {
+    "grupo": "7Nasdga",
+    "nombre": "dfg2",
+    "nota": "3asdg"
+  },
+  {
+    "grupo": "7Ndsg",
+    "nombre": "sdf3",
+    "nota": "3asdg"
+  },
+  {
+    "grupo": "7asdfN",
+    "nombre": "sadf4",
+    "nota": "3asdg"
+  },
+  {
+    "grupo": "asdfN",
+    "nombre": "asdf5",
+    "nota": "5ag"
+  }
 ]
