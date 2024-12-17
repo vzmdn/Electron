@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "electron": "^33.2.1"
+  },
+  "name": "menusencillo",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
