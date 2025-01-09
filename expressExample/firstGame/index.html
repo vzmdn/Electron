@@ -46,7 +46,7 @@
         let ballRadius3 = 60;
         let ballRadius4 = 60;
 
-        const spikeCount = 10;
+        const spikeCount = 7;
         const spikes = [];
 
         for (let i = 0; i < spikeCount; i++) {
@@ -143,7 +143,11 @@
                 const distX = Math.abs(x - spike.x);
                 const distY = Math.abs(y - spike.y);
                 if (distX < radius + spike.size && distY < radius + spike.size) {
-                    updateRadius(radius - 1);
+                    if (radius > 10) { // Set the threshold for disappearing
+                        updateRadius(radius - 1);
+                    } else {
+                        updateRadius(0); // Make the ball disappear
+                    }
                 }
             });
         }
